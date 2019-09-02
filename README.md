@@ -1,6 +1,6 @@
 # Check the conditions for the contest in Instagram
 
-This program loading comics from https://xkcd.com/ and post it to group in https://vk.com
+This program loads comics from https://xkcd.com/ and post it to group in https://vk.com
 
 ### How to install
 
