@@ -8,6 +8,8 @@ def get_upload_server(group_id, access_token):
         'v': 5.101
     }
     response = requests.get(url, params=params).json()
+    if 'error' in response:
+        raise requests.HTTPError
     return response['response']['upload_url']
 
 
@@ -18,6 +20,8 @@ def upload_photo_to_server(server_url, filename):
             'photo': f
         }
         response = requests.post(url, files=files).json()
+        if 'error' in response:
+            raise requests.HTTPError
         return response['server'], response['photo'], response['hash']
 
 
@@ -32,6 +36,8 @@ def upload_photo_to_album(server, photo, hash_vk, group_id, access_token):
         'v': 5.101
     }
     response = requests.post(url, params=params).json()
+    if 'error' in response:
+        raise requests.HTTPError
     return response['response'][0]['id'], response['response'][0]['owner_id']
 
 
@@ -46,3 +52,5 @@ def post_photo(access_token, comment, group_id, media_id, owner_id):
         'attachments': f'photo{owner_id}_{media_id}'
     }
     response = requests.post(url, params=params)
+    if 'error' in response:
+        raise requests.HTTPError
